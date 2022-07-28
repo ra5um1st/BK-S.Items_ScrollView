@@ -6,32 +6,54 @@ using UnityEngine;
 public class Controller : MonoBehaviour
 {
     [SerializeField] private float _rotationSpeed = 10f;
+    [SerializeField] private float _maxRotationX = 45f;
+    [SerializeField] private float _maxRotationY = 45f;
+    [SerializeField] private float _maxRotationZ = 45f;
 
     void Update()
     {
         if (Input.GetKey(KeyCode.W))
         {
-            transform.Rotate(Vector3.right, _rotationSpeed * Time.deltaTime);
+            if(transform.rotation.x < _maxRotationX / 100)
+            {
+                transform.Rotate(Vector3.right, _rotationSpeed * Time.deltaTime);
+            }
         }
         if (Input.GetKey(KeyCode.A))
         {
-            transform.Rotate(Vector3.forward, -_rotationSpeed * Time.deltaTime);
+            if (transform.rotation.z < _maxRotationZ / 100)
+            {
+                transform.Rotate(Vector3.forward, Mathf.Clamp(_rotationSpeed * Time.deltaTime, -_maxRotationZ, _maxRotationZ));
+            }
         }
         if (Input.GetKey(KeyCode.S))
         {
-            transform.Rotate(Vector3.right, -_rotationSpeed * Time.deltaTime);
+            if(transform.rotation.x > -_maxRotationX / 100)
+            {
+                transform.Rotate(Vector3.right, Mathf.Clamp(-_rotationSpeed * Time.deltaTime, -_maxRotationX, _maxRotationX));
+            }
         }
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Rotate(Vector3.forward, _rotationSpeed * Time.deltaTime);
+            if (transform.rotation.z > -_maxRotationZ / 100)
+            {
+                transform.Rotate(Vector3.forward, Mathf.Clamp(-_rotationSpeed * Time.deltaTime, -_maxRotationZ, _maxRotationZ));
+            }
+
         }
         if (Input.GetKey(KeyCode.Q))
         {
-            transform.Rotate(Vector3.up, _rotationSpeed * Time.deltaTime);
+            if (transform.rotation.y > -_maxRotationY / 100)
+            {
+                transform.Rotate(Vector3.up, Mathf.Clamp(-_rotationSpeed * Time.deltaTime, -_maxRotationY, _maxRotationY));
+            }
         }
         if (Input.GetKey(KeyCode.E))
         {
-            transform.Rotate(Vector3.up, -_rotationSpeed * Time.deltaTime);
+            if (transform.rotation.y < _maxRotationY / 100)
+            {
+                transform.Rotate(Vector3.up, Mathf.Clamp(_rotationSpeed * Time.deltaTime, -_maxRotationY, _maxRotationY));
+            }
         }
     }
 }

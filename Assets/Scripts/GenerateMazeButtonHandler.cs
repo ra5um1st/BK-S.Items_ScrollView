@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class GenerateMazeButtonHandler : MonoBehaviour
 {
-    public void OnButtonClick(MazeGenerator generator)
+    public void OnButtonClick(MazeGameManager manager)
     {
-        generator.GenerateMaze();
+        manager.ResetMaze();
+        manager.HideFinishMessage();
     }
 }

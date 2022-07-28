@@ -8,16 +8,16 @@ namespace Maze
 {
     public class MazeGenerator : MonoBehaviour
     {
-        private Cell[,] _cells;
         private static int _instanseCounter;
+        private Cell[,] _cells;
+        public Cell[,] Cells => _cells;
 
-        [SerializeField] private bool _generate;
-        public bool Executed
+        [SerializeField] private bool _generated;
+        public bool Generated
         {
-            get => _generate;
-            set => _generate = value;
+            get => _generated;
+            set => _generated = value;
         }
-
 
         [SerializeField] private int _rows;
         public int Rows
@@ -62,10 +62,10 @@ namespace Maze
 
         void Update()
         {
-            if (_generate)
+            if (_generated)
             {
                 Setup();
-                _generate = false;
+                _generated = false;
             }
         }
 
@@ -74,6 +74,7 @@ namespace Maze
             if (_maze != null)
             {
                 Destroy(_maze);
+                _instanseCounter--;
             }
             _maze = new GameObject($"Maze {_instanseCounter++}");
             _maze.transform.parent = this.transform;
@@ -138,7 +139,8 @@ namespace Maze
 
         public void GenerateMaze()
         {
-            _generate = true;
+            _generated = true;
+            transform.rotation = new Quaternion();
         }
     }
 }

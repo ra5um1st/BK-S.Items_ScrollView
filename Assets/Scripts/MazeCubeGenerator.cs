@@ -63,7 +63,7 @@ namespace Maze
             generator.Columns = columns;
             generator.Size = size;
             generator.Wall = wall;
-            generator.Executed = true;
+            generator.Generated = true;
             return generator;
         }
     }
